@@ -6,44 +6,90 @@
     <title>Document</title>
     <style>
         *{
+           margin: 0;
            border: 1px solid white; 
-           font-size: 30;
+           font-size: 30px;
         }
         header{
-            height: 20%;
+            height: 10%;
             color:brown;
             background-color:aqua;
             text-align: center;
         }
+        p{
+            border: 1px solid black; 
+        }
         main{
-            height: 60%;
+            height: 75%;
             color:blueviolet;
             background-color: aquamarine;
             text-align: center;
         }
         footer{
-            height: 20%;
+            height: 15%;
             color:blue;
             background-color: antiquewhite;
             text-align: center;
         }
     </style>
+    <script>
+        console.time('bigBang') ;
+        let timerBegin = new  Date() ;
+    </script>
 </head>
-<body>
+<body style="height: 723px;">
     <header>
         欢迎来到我的网页
     </header>
     <main>
-        hello
+        <p id="woed">abandon</p>
+        <p id="pron">/ə'bændən/</p>
+        <p id="chinese">vt.离弃,丢弃;遗弃,抛弃;放弃</p>
     </main>
-    <footer>
-        <p>
-            江西科技师范大学
-        </p>
+    <footer>   
+        江西科技师范大学
         22计科2班刘润林
     </footer>
     <script>
-        document.body.style.height = innerHeight-40+"px"
+        let myBody=document.querySelector('body');
+        myBody.style.height = innerHeight - 15 + 'px' ;
+        console.timeEnd('bigBang');
+        myBody.querySelector('header').textContent = "页面渲染时间：" + ( new Date() - timerBegin ) + 'ms';
+        console.time('xmb');
+        timerBegin=new Date();
+        let  i=1;
+        while( i<2**32/40){
+            i++;
+        }
+        //myBody.querySelector('main').textContent="算一个小目标的时间:"+(new Date()-timerBegin) + 'ms';
+/*
+1利用异步代码fetch从文本文件中获取字符串，字符串是cet6所有单词
+2利用字符串的api，用split把字符串处理成数组，用slice把字符串切割，用indexof,lastindexof获取字符串的位置
+3用dom控制技术，textcontent属性，把字符串赋值给页面的元素
+*/
+        let strCET6 = '' ;
+   let arrCET6 = [] ;
+   fetch('cet6.txt')
+   .then(res => res.text())
+   .then(txt => {
+                 strCET6 = txt ;
+                 arrCET6 =  strCET6.split('\r\n') ;
+                 let rand = Math.floor(arrCET6.length * Math.random() ) ;
+                 let cetWord = arrCET6[rand] ;
+                 let begin = cetWord.indexOf('\t') ;
+                 let end =  cetWord.lastIndexOf('\t') ;
+                 let word = cetWord.slice(0,begin) ;
+                 let pron = cetWord.slice(begin+1,end) ;
+                 let chinese = cetWord.slice(end+1) ;
+                    select('#word').textContent = word ;
+                    select('#pron').textContent = pron ;
+                    select('#chinese').textContent =chinese ;
+                }) ;
+   
+   function select(str){
+    let dom = document.querySelector(str);
+    return dom ;
+   }
     </script>
 </body>
 </html>
