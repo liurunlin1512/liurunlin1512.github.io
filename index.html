@@ -42,7 +42,7 @@
         欢迎来到我的网页
     </header>
     <main>
-        <p id="woed">abandon</p>
+        <p id="word">abandon</p>
         <p id="pron">/ə'bændən/</p>
         <p id="chinese">vt.离弃,丢弃;遗弃,抛弃;放弃</p>
     </main>
@@ -53,8 +53,10 @@
     <script>
         let myBody=document.querySelector('body');
         myBody.style.height = innerHeight - 15 + 'px' ;
-        console.timeEnd('bigBang');
+        console.timeEnd('bigBang') ;
         myBody.querySelector('header').textContent = "页面渲染时间：" + ( new Date() - timerBegin ) + 'ms';
+
+
         console.time('xmb');
         timerBegin=new Date();
         let  i=1;
