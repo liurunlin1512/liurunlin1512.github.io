@@ -43,19 +43,22 @@
             font-size: 1em;
         }
     </style>
-    <script>
+     <script>
         let Model = {} ;
-        Model.cet6String = '' ;
+        Model.cet6String = "a	/ei/	art.一(个);每一(个);(同类事物中)任一个\nabandon	/ə'bændən/	vt.离弃,丢弃;遗弃,抛弃;放弃\nabdomen	/æb'dəumen/	n.腹,下腹(胸部到腿部的部分)\nabatement	/ə'beitmənt/	n.减(免)税,打折扣,冲销\nabide	/ə'baid/	vi.(abode,abided)(by)遵守;坚持;vt.忍受,容忍\nability	/ə'biliti/	n.能力;本领;才能,才干;专门技能,天资\nable	/'eibl/	a.有(能力、时间、知识等)做某事,有本事的\nabnormal	/æb'nɔ:məl/	a.反常的,不正常的,不规则的\naboard	/ə'bɔ:d/	ad.&prep.在船(飞机、车)上;ad.上船(飞机、车)\nabolish	/ə'bɔliʃ/	vt.废除(法律、习惯等);取消\nabound	/ə'baund/	vi.大量存在;(~in,~with)充满,富于\nabout	/ə'baut/	ad.在周围;大约prep.关于;在周围a.准备\nabove	/ə'bʌv/	a.上述的ad.在上面,在前文prep.在..之上,高于\nabroad	/ə'brɔ:d/	ad.到国外,在国外;在传播,在流传\nabrupt	/ə'brʌpt/	a.突然的,出其不意的;(行为等)粗鲁无礼的\nabsence	/'æbsəns/	n.缺乏,不存在;缺席,不在场;缺席的时间\nabsent	/'æbsənt,æb'sent/	a.缺席的;缺乏的,不存在的;心不在焉的\nabsolute	/'æbsəlju:t/	a.绝对的,完全的;确实的,肯定的\nabsorb	/əb'sɔ:b,-'zɔ:b/	vt.吸收(水、光、蒸汽等）;使全神贯注;吞并/兼并\nabstract	/'æbstrækt/	a.抽象的n.摘要,文摘,梗概vt.提取;摘录要点" ;
         Model.CET6 = [] ;
-        Model.cetUrl = ['cet6.txt'];
-        for(let i=0; i<Model.cetUrl.length; i++){
-            fetch(Model.cetUrl[i])
-            .then(res => res.text())
-            .then(txt => {
-                Model.cet6String += txt ;
-                UI.log('单词库：' + Model.cetUrl[i] + ' 加载成功!') ;       
-            });
-          } ;
+      { 
+         let arr = Model.cet6String.split('\n') ;
+         for(let i=0; i< arr.length ; i++){
+             let s = arr[i] ;
+             let word = {} ;
+             let wordArr = s.split('\t') ;
+                 word.en = wordArr[0] ;
+                 word.pn = wordArr[1] ;
+                 word.cn = wordArr[2] ;
+             Model.CET6.push(word) ;    
+         }
+       }
       
     </script>
 </head>
@@ -65,43 +68,50 @@
     </header>
     <nav>
         <button id="randWord">随机单词</button>
-        <button id="loadWord">读入单词</button>
-    </nav>
+        <button id="firstWord">首个单词</button>
+        <button id="nextWord">下个单词</button>
+        <button id="lastWord">结尾单词</button>
+      </nav>
     <main>
         <p id="en">abandon</p>
-        <p id="pr">/ə'bændən/</p>
+        <p id="pn">/ə'bændən/</p>
         <p id="cn">vt.离弃,丢弃;遗弃,抛弃;放弃</p>
     </main>
     <footer>江西科技师范大学刘润林22计科2班</footer>
     <script>
        let UI = {} ;
       UI.log = function(s){
-      select('footer').textContent = s ;
+       select('footer').textContent = s ;
       } ;
-      UI.headerLog = function(s){
-      select('header').textContent = s ;
-      } ;
-      select('button#loadWord').onclick = function(){
-        Model.CET6 = Model.cet6String.split('\r\n') ;
-
-        if(Model.CET6.length < 5500){
-            UI.log("单词没有完全读入，Please wait!");
-        }else{
-            UI.log("我已经读入了"+ Model.CET6.length + "单词!")
-        }
-        
-      } ;
-      select('button#randWord').onclick = function(){
-                
-        if(Model.CET6.length < 5000){
-            UI.log("请点“读入单词”按钮");
-        }else{
-            let rand = Math.floor(Math.random() * Model.CET6.length) ;
-            UI.headerLog(Model.CET6[rand] ) ;
-            UI.log("我已经读入了"+ Model.CET6.length + "单词!")
-        }
-        
-      } ;
+      UI.printWord = function(word){ 
+        select('p#en').textContent = word.en ;
+        select('p#pn').textContent = word.pn ;
+        select('p#cn').textContent = word.cn ;
+     } ;
+     select('button#firstWord').onclick = function(){
+          let CET6 =  Model.CET6 ;
+          let word = CET6[0] ;
+          UI.printWord(word);
+          UI.log('你选中了第 1 个单词');
+       } ;
+    select('button#lastWord').onclick = function(){
+          let CET6 =  Model.CET6 ;
+          let word = CET6[CET6.length -1] ;
+          UI.printWord(word);
+          UI.log('你选中了最后一个单词');
+       } ;
+       select('button#randWord').onclick = function(){
+          let CET6 =  Model.CET6 ;
+          let rand = Math.floor( Math.random() * CET6.length );
+          let word = CET6[rand] ;
+          UI.printWord(word);
+          UI.log('你随机选中了第 '+(rand+1)+' 个单词');
+       } ;
+       select('button#nextWord').onclick = function(){
+          let word = {en: 'sorry ' , pn: 'so ri' , cn:'不好意思！' } ;
+          UI.printWord(word);
+          UI.log('你选中的按钮，我暂时还不会写代码');
+       } ;
      function select(selector){
         let dom = document.querySelector(selector) ;
         return dom ;
