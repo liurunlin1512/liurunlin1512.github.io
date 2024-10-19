@@ -21,6 +21,7 @@
         }
         header{
             height: 10%;
+            font-size: 2em;
             color:brown;
             background-color:aqua;
         }
@@ -30,6 +31,7 @@
         }
         main{
             height: 70%;
+            font-size: 1.2em;
             color:blueviolet;
             background-color: aquamarine;
         }
@@ -72,7 +74,20 @@
         <button id="nextWord">下个单词</button>
         <button id="lastWord">结尾单词</button>
       </nav>
-    <main>
+      <main>
+        <form id="myForm">
+          <p>系统登录和注册窗口</p>
+          名字：<input type="text" name="userName"/>
+          <hr/>
+          密码：<input type="password"  name="passWord"/>
+          <hr/>
+          <button id = 'login'>
+             登录
+          </button>
+          <button id = 'sign'>
+              注册
+           </button>
+        </form>
         <p id="en">abandon</p>
         <p id="pn">/ə'bændən/</p>
         <p id="cn">vt.离弃,丢弃;遗弃,抛弃;放弃</p>
@@ -80,39 +95,96 @@
     <footer>江西科技师范大学刘润林22计科2班</footer>
     <script>
        let UI = {} ;
+         UI.form = select('form#myForm') ;
+         
+      select('form button#sign').onclick = function(ev){
+        ev.preventDefault() ;
+        let name = UI.form.userName.value ;
+        let pass = UI.form.passWord.value ;
+        let user = { userName : name , 
+                     passWord : pass
+        } ;
+        let users = Model.users ;
+        let exist = false ;
+           for(let u of users){
+             if(u.userName === user.userName){
+                exist = true ;
+                break ;
+             }
+           }
+           if(exist){
+            UI.log('您注册的用户名：'+ user.userName + '重复存在，不成功！') ;
+           }else{
+            users.push(user) ;
+            UI.log('您注册的用户：'+ user.userName + '已经成功！') ;
+           }
+      } ; //end of 用户注册
+      select('form button#login').onclick = function(ev){
+        ev.preventDefault() ;
+        let name = UI.form.userName.value ;
+        let pass = UI.form.passWord.value ;
+        let user = { userName : name , 
+                     passWord : pass
+        } ;
+        let users = Model.users ;
+        let exist = false ;
+           for(let u of users){
+             if(u.userName === user.userName && u.passWord === user.passWord ){
+                exist = true ;
+                break ;
+             }
+           }
+           if(exist){
+            UI.log('用户名：'+ user.userName + '登录成功！') ;
+            UI.form.style.display = 'none' ;
+           }else{
+            UI.log( '用户名：' + user.userName + '，登录失败！') ;
+           }
+      } ; 
+
       UI.log = function(s){
        select('footer').textContent = s ;
       } ;
-      UI.printWord = function(word){ 
+     UI.printWord = function(word){ 
         select('p#en').textContent = word.en ;
         select('p#pn').textContent = word.pn ;
         select('p#cn').textContent = word.cn ;
      } ;
      select('button#firstWord').onclick = function(){
           let CET6 =  Model.CET6 ;
-          let word = CET6[0] ;
+              Model.pos = 0 ;
+          let word = CET6[Model.pos] ;
           UI.printWord(word);
           UI.log('你选中了第 1 个单词');
        } ;
     select('button#lastWord').onclick = function(){
           let CET6 =  Model.CET6 ;
-          let word = CET6[CET6.length -1] ;
+              Model.pos = CET6.length -1 ;
+          let word = CET6[Model.pos] ;
           UI.printWord(word);
           UI.log('你选中了最后一个单词');
        } ;
        select('button#randWord').onclick = function(){
           let CET6 =  Model.CET6 ;
           let rand = Math.floor( Math.random() * CET6.length );
-          let word = CET6[rand] ;
+              Model.pos = rand ;
+          let word = CET6[Model.pos] ;
           UI.printWord(word);
           UI.log('你随机选中了第 '+(rand+1)+' 个单词');
        } ;
        select('button#nextWord').onclick = function(){
-          let word = {en: 'sorry ' , pn: 'so ri' , cn:'不好意思！' } ;
+          let CET6 =  Model.CET6 ;
+          if(Model.pos === CET6.length - 1 ){
+            Model.pos = 0 ;
+          }else{
+            Model.pos ++ ;
+          }
+          let word = CET6[Model.pos] ;
           UI.printWord(word);
-          UI.log('暂时没有此功能');
+          UI.log('你选中了第' + (Model.pos+1) +  '个单词！');
        } ;
-     function select(selector){
+     
+       function select(selector){
         let dom = document.querySelector(selector) ;
         return dom ;
       }
