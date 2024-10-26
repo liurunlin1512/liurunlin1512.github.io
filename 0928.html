@@ -45,12 +45,28 @@
             font-size: 1em;
         }
     </style>
-     <script>
-        let Model = {} ;
-        Model.cet6String = "a	/ei/	art.一(个);每一(个);(同类事物中)任一个\nabandon	/ə'bændən/	vt.离弃,丢弃;遗弃,抛弃;放弃\nabdomen	/æb'dəumen/	n.腹,下腹(胸部到腿部的部分)\nabatement	/ə'beitmənt/	n.减(免)税,打折扣,冲销\nabide	/ə'baid/	vi.(abode,abided)(by)遵守;坚持;vt.忍受,容忍\nability	/ə'biliti/	n.能力;本领;才能,才干;专门技能,天资\nable	/'eibl/	a.有(能力、时间、知识等)做某事,有本事的\nabnormal	/æb'nɔ:məl/	a.反常的,不正常的,不规则的\naboard	/ə'bɔ:d/	ad.&prep.在船(飞机、车)上;ad.上船(飞机、车)\nabolish	/ə'bɔliʃ/	vt.废除(法律、习惯等);取消\nabound	/ə'baund/	vi.大量存在;(~in,~with)充满,富于\nabout	/ə'baut/	ad.在周围;大约prep.关于;在周围a.准备\nabove	/ə'bʌv/	a.上述的ad.在上面,在前文prep.在..之上,高于\nabroad	/ə'brɔ:d/	ad.到国外,在国外;在传播,在流传\nabrupt	/ə'brʌpt/	a.突然的,出其不意的;(行为等)粗鲁无礼的\nabsence	/'æbsəns/	n.缺乏,不存在;缺席,不在场;缺席的时间\nabsent	/'æbsənt,æb'sent/	a.缺席的;缺乏的,不存在的;心不在焉的\nabsolute	/'æbsəlju:t/	a.绝对的,完全的;确实的,肯定的\nabsorb	/əb'sɔ:b,-'zɔ:b/	vt.吸收(水、光、蒸汽等）;使全神贯注;吞并/兼并\nabstract	/'æbstrækt/	a.抽象的n.摘要,文摘,梗概vt.提取;摘录要点" ;
+      <script>
+        let Model = {
+
+        } ; 
+      
+        Model.users = [ {userName: 'Mike' , passWord: '1234'} ] ;
+        {
+         
+          let str = localStorage.getItem('users') ;
+         if(str){
+           let users = JSON.parse(str) ;
+           Model.users = users ;
+          }
+        }
+        Model.pos = 0 ;
+        Model.cet6String = "a	/ei/	art.一(个);每一(个);(同类事物中)任一个\r\nabandon	/ə'bændən/	vt.离弃,丢弃;遗弃,抛弃;放弃\r\nabdomen	/æb'dəumen/	n.腹,下腹(胸部到腿部的部分)\r\nabatement	/ə'beitmənt/	n.减(免)税,打折扣,冲销\r\nabide	/ə'baid/	vi.(abode,abided)(by)遵守;坚持;vt.忍受,容忍\r\nability	/ə'biliti/	n.能力;本领;才能,才干;专门技能,天资\r\nable	/'eibl/	a.有(能力、时间、知识等)做某事,有本事的\r\nabnormal	/æb'nɔ:məl/	a.反常的,不正常的,不规则的\r\naboard	/ə'bɔ:d/	ad.&prep.在船(飞机、车)上;ad.上船(飞机、车)\r\nabolish	/ə'bɔliʃ/	vt.废除(法律、习惯等);取消\r\nabound	/ə'baund/	vi.大量存在;(~in,~with)充满,富于\r\nabout	/ə'baut/	ad.在周围;大约prep.关于;在周围a.准备\r\nabove	/ə'bʌv/	a.上述的ad.在上面,在前文prep.在..之上,高于\r\nabroad	/ə'brɔ:d/	ad.到国外,在国外;在传播,在流传\r\nabrupt	/ə'brʌpt/	a.突然的,出其不意的;(行为等)粗鲁无礼的\r\nabsence	/'æbsəns/	n.缺乏,不存在;缺席,不在场;缺席的时间\r\nabsent	/'æbsənt,æb'sent/	a.缺席的;缺乏的,不存在的;心不在焉的\r\nabsolute	/'æbsəlju:t/	a.绝对的,完全的;确实的,肯定的\r\nabsorb	/əb'sɔ:b,-'zɔ:b/	vt.吸收(水、光、蒸汽等）;使全神贯注;吞并/兼并\r\nabstract	/'æbstrækt/	a.抽象的n.摘要,文摘,梗概vt.提取;摘录要点" ;
+        
+
         Model.CET6 = [] ;
-      { 
-         let arr = Model.cet6String.split('\n') ;
+     { 
+        let  createCET6 = function(str){
+        let arr = str.split('\r\n') ;
          for(let i=0; i< arr.length ; i++){
              let s = arr[i] ;
              let word = {} ;
@@ -61,7 +77,30 @@
              Model.CET6.push(word) ;    
          }
        }
+        fetch('cet/cet1.txt')
+        .then(res => res.text())
+        .then(txt => {
+                     Model.CET6 = [] ;
+                     createCET6(txt) ;
+        }) ;
+        fetch('cet/cet2.txt')
+        .then(res => res.text())
+        .then(txt => {                             
+                     createCET6(txt) ;
+                     UI.log('第二部分单词已经读入系统！');
+                  }
+        ) ;
+        fetch('cet/cet3.txt')
+        .then(res => res.text())
+        .then(txt => {                             
+                     createCET6(txt) ;
+                     UI.log('最后一部分单词终于读入了系统！');
+                  }
+        ) ;
+       createCET6(Model.cet6String) ; 
       
+    } 
+              
     </script>
 </head>
 <body>
@@ -93,101 +132,135 @@
         <p id="cn">vt.离弃,丢弃;遗弃,抛弃;放弃</p>
     </main>
     <footer>江西科技师范大学刘润林22计科2班</footer>
+    <form id="myForm">
+      <p>系统登录和注册窗口</p>
+      名字：<input type="text" name="userName"/>
+      <hr/>
+      密码：<input type="password"  name="passWord"/>
+      <hr/>
+      <button id = 'login' name="login">
+         登录
+      </button>
+      <button id = 'sign' name="sign">
+          注册
+       </button>
+    </form>
     <script>
-       let UI = {} ;
-         UI.form = select('form#myForm') ;
-         
-      select('form button#sign').onclick = function(ev){
-        ev.preventDefault() ;
-        let name = UI.form.userName.value ;
-        let pass = UI.form.passWord.value ;
-        let user = { userName : name , 
-                     passWord : pass
-        } ;
-        let users = Model.users ;
-        let exist = false ;
-           for(let u of users){
-             if(u.userName === user.userName){
-                exist = true ;
-                break ;
-             }
-           }
-           if(exist){
-            UI.log('您注册的用户名：'+ user.userName + '重复存在，不成功！') ;
-           }else{
-            users.push(user) ;
-            UI.log('您注册的用户：'+ user.userName + '已经成功！') ;
-           }
-      } ; //end of 用户注册
-      select('form button#login').onclick = function(ev){
-        ev.preventDefault() ;
-        let name = UI.form.userName.value ;
-        let pass = UI.form.passWord.value ;
-        let user = { userName : name , 
-                     passWord : pass
-        } ;
-        let users = Model.users ;
-        let exist = false ;
-           for(let u of users){
-             if(u.userName === user.userName && u.passWord === user.passWord ){
-                exist = true ;
-                break ;
-             }
-           }
-           if(exist){
-            UI.log('用户名：'+ user.userName + '登录成功！') ;
-            UI.form.style.display = 'none' ;
-           }else{
-            UI.log( '用户名：' + user.userName + '，登录失败！') ;
-           }
-      } ; 
-
-      UI.log = function(s){
-       select('footer').textContent = s ;
-      } ;
-     UI.printWord = function(word){ 
-        select('p#en').textContent = word.en ;
-        select('p#pn').textContent = word.pn ;
-        select('p#cn').textContent = word.cn ;
-     } ;
-     select('button#firstWord').onclick = function(){
-          let CET6 =  Model.CET6 ;
-              Model.pos = 0 ;
-          let word = CET6[Model.pos] ;
-          UI.printWord(word);
-          UI.log('你选中了第 1 个单词');
-       } ;
-    select('button#lastWord').onclick = function(){
-          let CET6 =  Model.CET6 ;
-              Model.pos = CET6.length -1 ;
-          let word = CET6[Model.pos] ;
-          UI.printWord(word);
-          UI.log('你选中了最后一个单词');
-       } ;
-       select('button#randWord').onclick = function(){
-          let CET6 =  Model.CET6 ;
-          let rand = Math.floor( Math.random() * CET6.length );
-              Model.pos = rand ;
-          let word = CET6[Model.pos] ;
-          UI.printWord(word);
-          UI.log('你随机选中了第 '+(rand+1)+' 个单词');
-       } ;
-       select('button#nextWord').onclick = function(){
-          let CET6 =  Model.CET6 ;
-          if(Model.pos === CET6.length - 1 ){
-            Model.pos = 0 ;
-          }else{
-            Model.pos ++ ;
-          }
-          let word = CET6[Model.pos] ;
-          UI.printWord(word);
-          UI.log('你选中了第' + (Model.pos+1) +  '个单词！');
-       } ;
      
-       function select(selector){
-        let dom = document.querySelector(selector) ;
-        return dom ;
-      }
-    </script>
+       let UI = {} ;
+           UI.form = select('form#myForm') ;
+      UI.form.sign.onclick = function(ev){
+          ev.preventDefault() ;
+       if(UI.form.userName.value.trim() !=="" && UI.form.passWord.value.trim() !==""){
+          let name = UI.form.userName.value ;
+          let pass = UI.form.passWord.value ;
+          let user = { userName : name , 
+                       passWord : pass
+          } ;
+          let users = Model.users ;
+          let exist = false ;
+             for(let u of users){
+               if(u.userName === user.userName){
+                  exist = true ;
+                  break ;
+               }
+             }
+             if(exist){
+              UI.log('您注册的用户名：'+ user.userName + '重复存在，不成功！') ;
+             }else{
+              users.push(user) ;
+              let s = JSON.stringify(users);
+              localStorage.setItem('users',s) ;
+              UI.log('您注册的用户：'+ user.userName + '已经成功！') ;
+  
+             }
+          }
+        } ; 
+        UI.form.login.onclick = function(ev){
+          ev.preventDefault() ;
+          let name = UI.form.userName.value ;
+          let pass = UI.form.passWord.value ;
+          let user = { userName : name , 
+                       passWord : pass
+          } ;
+          let users = Model.users ;
+          let exist = false ;
+             for(let u of users){
+               if(u.userName === user.userName && u.passWord === user.passWord ){
+                  exist = true ;
+                  break ;
+               }
+             }
+             if(exist){
+              UI.log('用户名：'+ user.userName + '登录成功！') ;
+              UI.form.style.display = 'none' ;
+             }else{
+              UI.log( '用户名：' + user.userName + '，登录失败！') ;
+             }
+        } ; 
+        UI.form.userName.onblur = function(ev){
+          ev.preventDefault() ;
+          let userName = UI.form.userName.value.trim()  ;
+          if(userName == ''){
+              UI.log('用户名不能为空白！') ;
+              UI.form.userName.focus() ;
+          }
+        } ;
+        UI.form.passWord.onblur = function(ev){
+          ev.preventDefault() ;
+          let passWord = UI.form.passWord.value.trim()  ;
+          if(passWord == ''){
+              UI.log('密码为空白，建议你不要这样！') ;
+              UI.form.passWord.focus() ;
+          }
+        } ;
+  
+        UI.log = function(s){
+         select('footer').textContent = s ;
+        } ;
+       UI.printWord = function(word){ 
+          select('p#en').textContent = word.en ;
+          select('p#pn').textContent = word.pn ;
+          select('p#cn').textContent = word.cn ;
+       } ;
+       select('button#firstWord').onclick = function(){
+            let CET6 =  Model.CET6 ;
+                Model.pos = 0 ;
+            let word = CET6[Model.pos] ;
+            UI.printWord(word);
+            UI.log('你选中了第 1 个单词');
+         } ;
+      select('button#lastWord').onclick = function(){
+            let CET6 =  Model.CET6 ;
+                Model.pos = CET6.length -1 ;
+            let word = CET6[Model.pos] ;
+            UI.printWord(word);
+            UI.log('你选中了最后一个单词');
+         } ;
+         select('button#randWord').onclick = function(){
+            let CET6 =  Model.CET6 ;
+            let rand = Math.floor( Math.random() * CET6.length );
+                Model.pos = rand ;
+            let word = CET6[Model.pos] ;
+            UI.printWord(word);
+            UI.log('你随机选中了第 '+(rand+1)+' 个单词');
+         } ;
+         select('button#nextWord').onclick = function(){
+            let CET6 =  Model.CET6 ;
+            if(Model.pos === CET6.length - 1 ){
+              Model.pos = 0 ;
+            }else{
+              Model.pos ++ ;
+            }
+            let word = CET6[Model.pos] ;
+            UI.printWord(word);
+            UI.log('你选中了第' + (Model.pos+1) +  '个单词！');
+         } ;
+       
+         function select(selector){
+          let dom = document.querySelector(selector) ;
+          return dom ;
+        }
+      </script>
 </body>
 </html>
