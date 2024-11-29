@@ -50,21 +50,21 @@ main{
 }
 main p#en{
     font-size: 1.6em;
-    color:lightblue;
-    text-shadow: 2px 2px gray ;
+    color:rgb(0, 255, 247);
+    text-shadow: 2px 2px blue ;
 }
 main p#pn{
     font-size: 1.2em;
-    color:lightseagreen;
+    color:rgb(34, 178, 32);
    }
 form{
     position: absolute ;
     width: 90% ;
     height: 50% ;
-    border: 2px solid gray;
+    border: 2px solid blue;
     left: 5% ;
     top: 10% ;
-    background-color: antiquewhite;
+    background-color: rgb(0, 255, 238);
     font-size: 1.1em ;
 }
 form input{
@@ -89,7 +89,7 @@ span#level{
 }
 p.cn{
   border:1px solid red ;
-  background-color: rgb(215, 246, 250);
+  background-color: blue;
   cursor: pointer;
   font-size: 0.8em;
   padding:0.2em 0.1em ;
