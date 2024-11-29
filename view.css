@@ -36,7 +36,7 @@ button{
     color:greenyellow;
 }
 button:hover{
-    color:rgb(0, 242, 255));
+    color:rgb(0, 242, 255);
 }
 button.big{
     width: 45%;
