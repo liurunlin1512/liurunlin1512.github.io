@@ -28,7 +28,7 @@ UI.form = select('form');
   UI.footerLog("无效注册，用户名和密码不能为空");
  
 }
-} ;
+} ; 
 
  select('button#loginIn').onclick = function(ev){
      ev.preventDefault() ;
@@ -76,7 +76,7 @@ UI.form = select('form');
          Model.learning =  learning ;
        UI.printWord() ;
        UI.userStatus() ;  
-    }else{ 
+    }else{
       if(!success){
          UI.footerLog(userName + '登录不成功，请查看用户名和密码！') ;
          }
@@ -84,7 +84,9 @@ UI.form = select('form');
          UI.footerLog('单词库还未加载完毕，请等会儿再登录！') ;
       }
    }
- } ; 
+ } ;
+
+
  select('button#firstWord').onclick = function(){
     Model.pos = 0 ;
     UI.printWord() ;
@@ -107,6 +109,7 @@ UI.form = select('form');
      UI.printWord() ;
     
  }
+
 UI.cnDoms = document.querySelectorAll('p.cn') ;
 for(let cn of UI.cnDoms){
  cn.onclick = function(){
@@ -209,6 +212,7 @@ UI.response('复习'+ Model.learning.length +'个单词！');
 UI.log('您没背完2组单词，不能进入复习环节！') ;
 }
 } ; 
+
 
 function select(s){
   let dom = document.querySelector(s) ;

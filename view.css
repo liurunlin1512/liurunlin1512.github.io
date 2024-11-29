@@ -14,11 +14,11 @@ header{font-size: 1.8em;
 }
 header p#status{
     font-size: 0.6em;
-    color: rgb(0, 170, 255);
+    color: orangered;
 }
 header p#status span{
     font-size: 1.2em;
-    color: rgb(47, 255, 54) ;
+    color: red ;
     font-weight: bold;
 }
 nav{ height: 6% ;}
@@ -32,11 +32,11 @@ button.small{
 button{
     display: inline;
     border: none;
-    background-color:black;
-    color:rgb(255, 47, 231);
+    background-color: black;
+    color:greenyellow;
 }
 button:hover{
-    color:rgba(255, 255, 255, 0);
+    color:white;
 }
 button.big{
     width: 45%;
@@ -50,12 +50,12 @@ main{
 }
 main p#en{
     font-size: 1.6em;
-    color:rgb(173, 218, 230);
-    text-shadow: 2px 2px rgb(128, 128, 128) ;
+    color:lightblue;
+    text-shadow: 2px 2px gray ;
 }
 main p#pn{
     font-size: 1.2em;
-    color:whitesmoke;
+    color:lightseagreen;
    }
 form{
     position: absolute ;
@@ -96,19 +96,19 @@ p.cn{
   margin-bottom: 0.2em;
 }
 p.cn.right{
-  background-color: green;
-  color: yellow ;
+  background-color: yellow;
+  color: red ;
 }
 p.cn.wrong{
   background-color: gray;
   color:white;
 }
 p.cn:hover{
-    color: rgb(0, 255, 89) ;
+    color: blue ;
 }
 main span#response{
     font-size: 1.8em;
-    color: rgb(0, 170, 255);
+    color: red;
     position: absolute;
     right: 0.5em;
     top:3em;
