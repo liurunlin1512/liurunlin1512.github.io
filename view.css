@@ -14,11 +14,11 @@ header{font-size: 1.8em;
 }
 header p#status{
     font-size: 0.6em;
-    color: black;
+    color: orangered;
 }
 header p#status span{
     font-size: 1.2em;
-    color: black ;
+    color: red ;
     font-weight: bold;
 }
 nav{ height: 6% ;}
@@ -36,7 +36,7 @@ button{
     color:greenyellow;
 }
 button:hover{
-    color:rgb(0, 242, 255);
+    color:white;
 }
 button.big{
     width: 45%;
@@ -50,21 +50,21 @@ main{
 }
 main p#en{
     font-size: 1.6em;
-    color:rgb(0, 255, 247);
-    text-shadow: 2px 2px blue ;
+    color:lightblue;
+    text-shadow: 2px 2px gray ;
 }
 main p#pn{
     font-size: 1.2em;
-    color:rgb(34, 178, 32);
+    color:lightseagreen;
    }
 form{
     position: absolute ;
     width: 90% ;
     height: 50% ;
-    border: 2px solid blue;
+    border: 2px solid gray;
     left: 5% ;
     top: 10% ;
-    background-color: rgb(0, 255, 238);
+    background-color: antiquewhite;
     font-size: 1.1em ;
 }
 form input{
@@ -84,38 +84,38 @@ span#level{
     position: absolute;
     right:20px;
     top:1px;
-    color:rgb(0, 255, 51);
+    color:blue;
     font-size: 0.5em;
 }
 p.cn{
-  border:1px solid red ;
-  background-color: blue;
+  border:1px solid blue ;
+  background-color: antiquewhite;
   cursor: pointer;
   font-size: 0.8em;
   padding:0.2em 0.1em ;
   margin-bottom: 0.2em;
 }
 p.cn.right{
-  background-color: rgb(0, 255, 21);
-  color: green ;
+  background-color: yellow;
+  color: red ;
 }
 p.cn.wrong{
-  background-color: white;
-  color:blue;
+  background-color: gray;
+  color:white;
 }
 p.cn:hover{
-    color: black ;
+    color: blue ;
 }
 main span#response{
     font-size: 1.8em;
-    color: green;
+    color: red;
     position: absolute;
     right: 0.5em;
     top:3em;
 }
 p#log{
-    background-color:white;
-    color: blue;
+    background-color: gray;
+    color: white;
     font-size: 0.65em;
     padding: 5px 10px;
     text-align: center;
