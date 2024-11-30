@@ -107,14 +107,14 @@ p.cn:hover{
 }
 main span#response{
     font-size: 1.8em;
-    color: red;
+    color: rgb(47, 128, 0);
     position: absolute;
     right: 0.5em;
     top:3em;
 }
 p#log{
     background-color: rgb(128, 128, 128);
-    color: white;
+    color: red;
     font-size: 0.65em;
     padding: 5px 10px;
     text-align: center;
