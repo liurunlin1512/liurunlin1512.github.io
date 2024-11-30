@@ -95,12 +95,12 @@ p.cn{
   margin-bottom: 0.2em;
 }
 p.cn.right{
-  background-color: yellow;
-  color: red ;
+  background-color: rgb(0, 128, 113);
+  color: rgb(0, 255, 255) ;
 }
 p.cn.wrong{
   background-color: gray;
-  color:white;
+  color:rgb(21, 128, 0);
 }
 p.cn:hover{
     color: blue ;
@@ -113,7 +113,7 @@ main span#response{
     top:3em;
 }
 p#log{
-    background-color: gray;
+    background-color: rgb(128, 128, 128);
     color: white;
     font-size: 0.65em;
     padding: 5px 10px;
