@@ -14,11 +14,11 @@ header{font-size: 1.8em;
 }
 header p#status{
     font-size: 0.6em;
-    color: orangered;
+    color: rgb(0, 217, 255);
 }
 header p#status span{
     font-size: 1.2em;
-    color: red ;
+    color: blue ;
     font-weight: bold;
 }
 nav{ height: 6% ;}
@@ -50,22 +50,21 @@ main{
 }
 main p#en{
     font-size: 1.6em;
-    color:lightblue;
-    text-shadow: 2px 2px gray ;
+    color:rgb(111, 128, 0);
+    text-shadow: 2px 2px rgb(0, 187, 255) ;
 }
 main p#pn{
     font-size: 1.2em;
-    color:lightseagreen;
+    color:rgb(44, 178, 32);
    }
 form{
     position: absolute ;
     width: 90% ;
     height: 50% ;
-    border: 2px solid gray;
+    border: 2px solid rgb(68, 0, 255);
     left: 5% ;
     top: 10% ;
-    background-color: antiquewhite;
-    font-size: 1.1em ;
+    background-color: rgb(0, 255, 60)
 }
 form input{
     font-size: 1.1em ;
