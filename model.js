@@ -67,8 +67,8 @@ Model.users = [] ;
        
     }
 
-let UI = {} ; 
-UI.printWord = function(){
+       let UI = {} ; 
+        UI.printWord = function(){
         let CET6 = Model.CET6 ;
         let learning = Model.learning ;
         let pos = Model.pos ;
@@ -86,15 +86,15 @@ UI.printWord = function(){
             let lv = Math.random() * (5 - i) ;
             if(lv < 1 && !ok ){
                 ok = true ;
-                cnArr.push(correctCn) ;
+                cnArr.push(CET6[pos].cn) ;
             }else{
-                let rand = Math.floor(Math.random() * CET6.length ) ;
-                cnArr.push(CET6[rand].cn) ;
+                let rand = Math.floor(Math.random() * Model.CET6.length ) ;
+                cnArr.push(Model.CET6[rand].cn) ;
                 }
          }
          if(!ok){
                 ok = true ;
-                cnArr[4] = correctCn ;
+                cnArr[4] = CET6[pos].cn ;
             }
            
         for(let i=1; i<6 ;i++){
@@ -102,9 +102,9 @@ UI.printWord = function(){
            select('p#cn'+ i).className = 'cn' ; 
         }
     let s = "" ;
-    if (learning[pos].timer){
-      let d = learning[pos].timer ;
-      s = '哟，您在'+ d.slice(0,2) +'年' +  d.slice(2,4)  + '月' + (d.slice(4))+ '日'+' 学过'  ; 
+    if (CET6[pos].timer){
+      let d = CET6[pos].timer ;
+      s = '哟，您在'+ d.getFullYear() +'年' + ( d.getMonth() + 1 ) + '月' + (d.getDate())+ '日'+' 学过'  ; 
     }else{
         s = "哟，您这个单词没学过。"
     }
@@ -124,25 +124,23 @@ setTimeout(() => {
 }, 3*1000);
 };
 UI.response = function(s){
-select('span#response').textContent = s ;
-setTimeout(() => {
-    select('span#response').textContent = '' ;
-}, 2000);
-}
-UI.userStatus = function(){
-let easy = 0, normal = 0, hard=0 ;
-for(let word of Model.learned){
-    if(word.level <= 0){
-        easy ++ ;
-    }else if(word.level < 3){
-        normal ++ ;
-     }else{
-        hard ++ ;
-     }
-}
-select('p#status span#user').textContent = Model.user ;
-select('p#status span#easy').textContent = easy ;
-select('p#status span#normal').textContent = normal ;
-select('p#status span#hard').textContent = hard ;
-
-} ;
+    select('span#response').textContent = s ;
+  }
+  UI.userStatus = function(){
+    let easy = 0, normal = 0, hard=0 ;
+    for(let word of Model.learned){
+        if(word.level == 0){
+            easy ++ ;
+        }else if(word.level < 3){
+            normal ++ ;
+         }else{
+            hard ++ ;
+         }
+    }
+    let s = Model.user + '状态: ' +easy +'熟悉/'+ normal +'一般/'+ hard+ '陌生'    ;
+    select('p#title').textContent = s ;
+    setTimeout(()=>{
+        select('p#title').textContent = 'CET6-轻轻松松背单词';
+    },1000*10)
+  } ;
+  
