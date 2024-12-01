@@ -86,25 +86,25 @@ Model.users = [] ;
             let lv = Math.random() * (5 - i) ;
             if(lv < 1 && !ok ){
                 ok = true ;
-                cnArr.push(CET6[pos].cn) ;
+                cnArr.push(correctCn) ;
             }else{
-                let rand = Math.floor(Math.random() * Model.CET6.length ) ;
-                cnArr.push(Model.CET6[rand].cn) ;
+                let rand = Math.floor(Math.random() * CET6.length ) ;
+                cnArr.push(CET6[rand].cn) ;
                 }
          }
          if(!ok){
                 ok = true ;
-                cnArr[4] = CET6[pos].cn ;
+                cnArr[4] = correctCn ;
             }
            
         for(let i=1; i<6 ;i++){
            select('p#cn'+ i).textContent =  cnArr[i-1] ;
-           select('p#cn'+ i).className = 'cn' ; 
+           select('p#cn'+ i).className = 'cn' ;
         }
     let s = "" ;
-    if (CET6[pos].timer){
-      let d = CET6[pos].timer ;
-      s = '哟，您在'+ d.getFullYear() +'年' + ( d.getMonth() + 1 ) + '月' + (d.getDate())+ '日'+' 学过'  ; 
+    if (learning[pos].timer){
+      let d = learning[pos].timer ;
+      s = '哟，您在'+ d.slice(0,2) +'年' +  d.slice(2,4)  + '月' + (d.slice(4))+ '日'+' 学过'  ; 
     }else{
         s = "哟，您这个单词没学过。"
     }
